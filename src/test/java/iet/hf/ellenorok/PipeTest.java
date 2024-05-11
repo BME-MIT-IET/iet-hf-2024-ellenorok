@@ -82,6 +82,8 @@ class PipeTest {
     void WaterFlowsFromPumpToCisternTest() {
         pipe1.setSlipperyCounter(4); pipe1.setOldWaterState(false);
         pump1.setWater(true);
+        
+        assertEquals(0, g.getMechanicPoints());
 
         Timer.getInstance().turn();
         Timer.getInstance().turn();
