@@ -48,7 +48,7 @@ public class PipeTest {
     
 
     @Test
-    void TestSlipperyPipe() {
+    void TestSlipperyPipeTest() {
         pipe1.setSlipperyCounter(4);        
         //add players to a field
         mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
@@ -58,7 +58,7 @@ public class PipeTest {
     }
 
     @Test
-    void CantStayTwoPlayerOnTheSamePipe() {
+    void CantStayTwoPlayerOnTheSamePipeTest() {
 
         //add players to a field
         mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
@@ -68,4 +68,14 @@ public class PipeTest {
         assertEquals(cistern1, mechanic1.getActiveField());
     }
 
+    @Test
+    void UnbreakablePipeTest() {
+        pipe1.setBreakProofCounter(1);  //Set pipe unbreakable for 1 round
+        
+        saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
+
+        saboteur1.breakField();     //Saboteur trys to break pipe1
+
+        assertEquals(false, pipe1.isBroken());
+    }
 }
