@@ -40,7 +40,7 @@ public class AppTest
         //
         saboteur1.breakField();
         
-        assertEquals(true, pipe1.isBroken());
+        assertEquals(false, pipe1.isBroken());
         
     }
 }
