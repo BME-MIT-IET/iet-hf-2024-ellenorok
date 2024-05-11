@@ -17,7 +17,7 @@ public class PipeTest {
     private Game g;
 
     @BeforeEach
-    void setVariables(){
+    void CreateGame(){
         pipe1 = new Pipe();
         cistern1 = new Cistern(pipe1);
         pump1 = new Pump(null, pipe1);
