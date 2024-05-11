@@ -71,4 +71,13 @@ public class PlayerTest {
 
     }
     
+    @Test
+    void MakesStickyWasFreshlyAppliedTest() {
+        saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
+
+        assertEquals(false, pipe1.isSticky());
+        saboteur1.makeSticky();
+        assertEquals(false, pipe1.isSticky());      //Pipe is not sticky, because makeSticky was freshly applied, and the player needs to step off.
+    }
+
 }
