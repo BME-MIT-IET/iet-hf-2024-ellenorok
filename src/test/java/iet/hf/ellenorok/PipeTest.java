@@ -3,11 +3,10 @@ package iet.hf.ellenorok;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PipeTest {
+class PipeTest {
 
     private Pipe pipe1;
     private Cistern cistern1;
@@ -77,5 +76,16 @@ public class PipeTest {
         saboteur1.breakField();     //Saboteur trys to break pipe1
 
         assertEquals(false, pipe1.isBroken());
+    }
+
+    @Test
+    void WaterFlowsFromPumpToCisternTest() {
+        pipe1.setSlipperyCounter(4); pipe1.setOldWaterState(false);
+        pump1.setWater(true);
+
+        Timer.getInstance().turn();
+        Timer.getInstance().turn();
+
+        assertEquals(1, g.getMechanicPoints());
     }
 }
