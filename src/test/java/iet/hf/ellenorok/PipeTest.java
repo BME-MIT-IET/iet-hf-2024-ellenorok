@@ -49,11 +49,11 @@ public class PipeTest {
 
     @Test
     void TestSlipperyPipeTest() {
-        pipe1.setSlipperyCounter(4);        
+        pipe1.setSlipperyCounter(4);
         //add players to a field
         mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
 
-        mechanic1.moveToField(pipe1);
+        mechanic1.moveToField(pipe1);                           //Mechanic trys to step on the slippery pipe. Should slip of.
         assertNotEquals(pipe1, mechanic1.getActiveField());
     }
 
@@ -64,7 +64,7 @@ public class PipeTest {
         mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
         saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
 
-        mechanic1.moveToField(pipe1);
+        mechanic1.moveToField(pipe1);   //Mechanic trys to step on the pipe, that has already a player on.
         assertEquals(cistern1, mechanic1.getActiveField());
     }
 

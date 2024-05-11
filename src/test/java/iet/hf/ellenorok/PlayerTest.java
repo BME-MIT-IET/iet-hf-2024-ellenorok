@@ -50,5 +50,15 @@ public class PlayerTest {
         saboteur1.breakField();
         assertEquals(true, ((Pipe)saboteur1.getActiveField()).isBroken());
     }
+
+    @Test
+    void MechanicRepairsPipeTest() {
+        pipe1.setBroken(true);
+        
+        mechanic1.setActiveField(pipe1); pipe1.addPlayer(mechanic1);
+
+        mechanic1.repairField();
+        assertEquals(false, ((Pipe)mechanic1.getActiveField()).isBroken());
+    }
     
 }
