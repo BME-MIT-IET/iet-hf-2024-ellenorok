@@ -26,7 +26,6 @@ public class PlayerTest {
        cistern1.addNeighbor(pipe1); pipe1.addNeighbor(cistern1);
        pump1.addNeighbor(pipe1); pipe1.addNeighbor(pump1);
        g = Game.getInstance();
-       g.setActivePlayer(mechanic1);
        //add fields to game
        g.addField(pipe1);
        g.addField(cistern1);
@@ -43,10 +42,11 @@ public class PlayerTest {
     }
 
     @Test
-    void SaboteurBreaksPipe() {
+    void SaboteurBreaksPipeTest() {
         //add players to a field
         saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
 
+        assertEquals(false, ((Pipe)saboteur1.getActiveField()).isBroken());
         saboteur1.breakField();
         assertEquals(true, ((Pipe)saboteur1.getActiveField()).isBroken());
     }
@@ -56,9 +56,19 @@ public class PlayerTest {
         pipe1.setBroken(true);
         
         mechanic1.setActiveField(pipe1); pipe1.addPlayer(mechanic1);
-
+        assertEquals(true, ((Pipe)mechanic1.getActiveField()).isBroken());
         mechanic1.repairField();
         assertEquals(false, ((Pipe)mechanic1.getActiveField()).isBroken());
+    }
+
+    @Test
+    void SaboteurMakesPipeSlipperyTest() {
+       
+        saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);        
+        assertEquals(false, ((Pipe)saboteur1.getActiveField()).isSlippery());
+        saboteur1.makeSlippery();
+        assertEquals(true, ((Pipe)saboteur1.getActiveField()).isSlippery());
+
     }
     
 }
