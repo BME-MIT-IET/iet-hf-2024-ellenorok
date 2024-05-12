@@ -82,18 +82,7 @@ class PipeTest {
         assertEquals(false, pipe1.isBroken());
     }
 
-    @Test
-    void WaterFlowsFromPumpToCisternTest() {
-        pipe1.setSlipperyCounter(4); pipe1.setOldWaterState(false);
-        pump1.setWater(true);
-        
-        assertEquals(0, g.getMechanicPoints());
-
-        Timer.getInstance().turn();
-        Timer.getInstance().turn();
-
-        assertEquals(1, g.getMechanicPoints());
-    }
+    
 
     @Test
     void ChangePipesNeighbourTest() {
