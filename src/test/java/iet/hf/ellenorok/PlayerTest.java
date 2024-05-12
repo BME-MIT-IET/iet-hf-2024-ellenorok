@@ -80,4 +80,20 @@ public class PlayerTest {
         assertEquals(false, pipe1.isSticky());      //Pipe is not sticky, because makeSticky was freshly applied, and the player needs to step off.
     }
 
+    @Test
+    void MechanicPlacesPumpTest() {
+
+        Mechanic mechanic1 = new Mechanic(pipe1, new Pump());
+
+        pipe1.addPlayer(mechanic1);
+
+        g.setActivePlayer(mechanic1);
+
+        assertNotEquals(Pump.class, mechanic1.activeField.getClass());
+
+        mechanic1.place();          //Mechanic trys to place a pump
+
+        assertEquals(Pump.class, mechanic1.activeField.getClass());
+    }
+
 }
