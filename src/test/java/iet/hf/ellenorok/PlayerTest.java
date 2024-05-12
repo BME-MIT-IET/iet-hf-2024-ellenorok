@@ -137,4 +137,35 @@ public class PlayerTest {
         assertFalse(cistern1.hasPump());
     }
 
+    @Test
+    void BreakAndRepairPipeTest() {
+
+
+        //add players to a field
+        pump1.addPlayer(mechanic1); mechanic1.setActiveField(pump1);
+        cistern1.addPlayer(saboteur1); saboteur1.setActiveField(cistern1);
+
+        g.setActivePlayer(saboteur1);
+
+
+        //kimenethez ezt ki kell kommente
+        saboteur1.moveToField(pipe1);
+        assertEquals(pipe1, saboteur1.getActiveField());
+
+        saboteur1.breakField();
+        assertTrue(((Pipe) saboteur1.getActiveField()).isBroken());
+
+        saboteur1.moveToField(pump1);
+        assertEquals(pump1, saboteur1.getActiveField());
+
+        g.endTurn();
+        mechanic1.moveToField(pipe1);
+        assertEquals(pipe1, mechanic1.getActiveField());
+
+        mechanic1.repairField();
+        assertFalse(((Pipe) mechanic1.getActiveField()).isBroken());
+
+
+    }
+
 }
