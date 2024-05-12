@@ -1,7 +1,9 @@
 package iet.hf.ellenorok;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -89,5 +91,40 @@ class PipeTest {
         Timer.getInstance().turn();
 
         assertEquals(1, g.getMechanicPoints());
+    }
+
+    @Test
+    void ChangePipesNeighbourTest() {
+        // create fields
+        Pipe pipe = new Pipe();
+        Pump pump1 = new Pump(pipe, null);
+        Pump pump2 = new Pump(null, pipe);
+        Pump pump3 = new Pump();
+
+        pump1.addNeighbor(pipe); pipe.addNeighbor(pump1);
+        pump2.addNeighbor(pipe); pipe.addNeighbor(pump2);
+
+        mechanic1.setActiveField(pump1); pump1.addPlayer(mechanic1);
+
+
+        g.addField(pump1);
+        g.addField(pump2);
+        g.addField(pump3);
+        g.addField(pipe);
+
+
+        // add periodics to timer
+        Timer.getInstance().addPeriodic(pump1);
+        Timer.getInstance().addPeriodic(pump2);
+        Timer.getInstance().addPeriodic(pump3);
+        Timer.getInstance().addPeriodic(pipe);
+        //add statefuls to timer
+        Timer.getInstance().addStateful(pipe);
+
+        assertFalse(pump3.getNeighbours().contains(pipe));
+
+        g.movePipe(pipe, pump2, pump3);     //Change one of pipe's end from pump2 to pump3
+
+        assertTrue(pump3.getNeighbours().contains(pipe));
     }
 }
