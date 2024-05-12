@@ -164,8 +164,19 @@ public class PlayerTest {
 
         mechanic1.repairField();
         assertFalse(((Pipe) mechanic1.getActiveField()).isBroken());
+    }
 
+    @Test
+    void MechanicRepairsPumpTest(){
+        pump1.addPlayer(mechanic1); mechanic1.setActiveField(pump1);
+        pump1.setBroken(true);
 
+        g.setActivePlayer(mechanic1);
+        
+        assertTrue(((Pump) mechanic1.getActiveField()).isBroken());
+
+        mechanic1.repairField();
+        assertFalse(((Pump) mechanic1.getActiveField()).isBroken());
     }
 
 }
