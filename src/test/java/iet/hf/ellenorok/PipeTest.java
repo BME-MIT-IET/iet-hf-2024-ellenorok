@@ -42,6 +42,8 @@ class PipeTest {
        Timer.getInstance().addPeriodic(pipe1);
        //add statefuls to timer
        Timer.getInstance().addStateful(pipe1);
+       g.setActionNumber(5);
+
     }
 
 

@@ -44,6 +44,8 @@ public class PumpTest {
         Timer.getInstance().addStateful(pipe1);
         Timer.getInstance().addStateful(pipe2);
         Timer.getInstance().addStateful(pipe3);
+        g.setActionNumber(5);
+
     }
 
     @Test
