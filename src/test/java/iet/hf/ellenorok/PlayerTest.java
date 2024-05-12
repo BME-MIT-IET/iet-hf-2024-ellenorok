@@ -96,4 +96,17 @@ public class PlayerTest {
         assertEquals(Pump.class, mechanic1.activeField.getClass());
     }
 
+    @Test
+    void MechanicPicksUpPumpFromCisternTest() {
+        Cistern cistern1 = new Cistern(new Pump());
+
+        mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
+
+        assertEquals(false, mechanic1.HasCarriedPum());
+
+        mechanic1.pickup();
+
+        assertEquals(true, mechanic1.HasCarriedPum());
+    }
+
 }
