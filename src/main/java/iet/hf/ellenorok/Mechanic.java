@@ -20,7 +20,7 @@ public class Mechanic extends Player implements Serializable {
 
     public Mechanic(Field field, Pump pump){ activeField = field; carriedPump = pump; }
 
-    public boolean HasCarriedPum(){
+    public boolean HasCarriedPump(){
         if(carriedPump != null){
             return true;
         }

@@ -1,7 +1,9 @@
 package iet.hf.ellenorok;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,13 +20,14 @@ public class PlayerTest {
     @BeforeEach
     void CreateGame(){
         pipe1 = new Pipe();
-        cistern1 = new Cistern(pipe1);
+        cistern1 = new Cistern(new Pump());
         pump1 = new Pump(null, pipe1);
         mechanic1 = new Mechanic();
         saboteur1 = new Saboteur();
        // connect components
        cistern1.addNeighbor(pipe1); pipe1.addNeighbor(cistern1);
        pump1.addNeighbor(pipe1); pipe1.addNeighbor(pump1);
+       cistern1.setInput(pipe1);
        g = Game.getInstance();
        //add fields to game
        g.addField(pipe1);
@@ -39,6 +42,7 @@ public class PlayerTest {
        Timer.getInstance().addPeriodic(pipe1);
        //add statefuls to timer
        Timer.getInstance().addStateful(pipe1);
+       g.setActionNumber(5);
     }
 
     @Test
@@ -98,15 +102,39 @@ public class PlayerTest {
 
     @Test
     void MechanicPicksUpPumpFromCisternTest() {
-        Cistern cistern1 = new Cistern(new Pump());
+        
 
         mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
 
-        assertEquals(false, mechanic1.HasCarriedPum());
+        assertEquals(false, mechanic1.HasCarriedPump());
 
         mechanic1.pickup();
 
-        assertEquals(true, mechanic1.HasCarriedPum());
+        assertEquals(true, mechanic1.HasCarriedPump());
+    }
+
+    @Test
+    void PickUpPumpAndPlaceItTest(){
+        mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
+        g.setActivePlayer(mechanic1);
+
+        assertTrue(cistern1.hasPump());
+        assertFalse(mechanic1.HasCarriedPump());
+        assertEquals(Cistern.class, mechanic1.getActiveField().getClass());
+
+        mechanic1.pickup();
+
+        assertTrue(mechanic1.HasCarriedPump());
+
+        mechanic1.moveToField(pipe1);
+
+        assertEquals(Pipe.class, mechanic1.getActiveField().getClass());
+        
+        mechanic1.place();
+
+        assertEquals(Pump.class, mechanic1.getActiveField().getClass());
+        assertFalse(mechanic1.HasCarriedPump());
+        assertFalse(cistern1.hasPump());
     }
 
 }

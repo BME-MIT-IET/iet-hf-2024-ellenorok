@@ -47,7 +47,7 @@ public class PumpTest {
     }
 
     @Test
-    void Test20() {
+    void ChangePumpFlowDirectionTest() {
 
         mechanic1.setActiveField(pump); pump.addPlayer(mechanic1);
 
