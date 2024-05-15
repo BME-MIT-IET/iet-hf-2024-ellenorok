@@ -32,16 +32,16 @@ public class StepDefinitionPlayerGetsPoint {
 	    
 	    if(name.equals("mechanic")) {
 	    	mechanic = new Mechanic();
+	    	game.addPlayer(mechanic);
 	    	game.setActivePlayer(mechanic);
-		    game.addPlayer(mechanic);
 		    mechanic.setActiveField(pipe);
 		    pipe.addPlayer(mechanic);
 		    pipe._break();
 	    }
 	    else {
 	    	saboteur = new Saboteur();
-	    	game.setActivePlayer(saboteur);
 	    	game.addPlayer(saboteur);
+	    	game.setActivePlayer(saboteur);
 		    saboteur.setActiveField(pipe);
 		    pipe.addPlayer(saboteur);
 	    }
