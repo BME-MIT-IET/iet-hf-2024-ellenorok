@@ -15,3 +15,6 @@
 - A képen jól látható, hogy ezen tesztesetek a BLL-t tartalmazó osztályok jórészét lefedik.
 - A hiányosságot BLL beli osztályok esetén a Getterek és Setterek tesztelésének hiánya, valamint az absztrakt függvények üres implementációinak tesztelésének hiánya okozza.
 - A grafikus osztályokat nem teszteltem.
+- Hozzáadtam OpenClover teszt lefedettség vizsgálatot a projekthez
+- Ezeket a vizsgálatokat automatizáltam a maven környezeten belül
+![image](https://github.com/BME-MIT-IET/iet-hf-2024-ellenorok/assets/127612755/ec8ad375-e079-4a42-a17d-76c031a0efba)
