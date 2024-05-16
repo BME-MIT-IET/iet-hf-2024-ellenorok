@@ -20,9 +20,7 @@ public class StepDefinitionPlayerGetsPoint {
 	    cistern = new Cistern(pipe);
 	    source = new Source(pipe);
 	    
-	    cistern.addNeighbor(pipe);
 	    pipe.addNeighbor(cistern);
-	    source.addNeighbor(pipe);
 	    pipe.addNeighbor(source);
 	    
 	    game = Game.getInstance();
