@@ -249,7 +249,7 @@ public class Pipe extends Field implements Periodic, Stateful, Serializable {
     public boolean
     isSticky() {
         //If sticky counter is 0 then the stickiness expired
-        //Fi sticky counter is 5 then was freshly applied.
+        //If sticky counter is 5 then was freshly applied.
         return stickyCounter > 0 && stickyCounter < 5;
     }
 
