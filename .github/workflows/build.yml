@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - static-analysis
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
