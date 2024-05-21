@@ -1,52 +1,22 @@
-import model.*;
-
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class GraphicsDesigner extends JFrame implements ActionListener {
-    private Game game;
-    protected List<Pipe> edges = new ArrayList<Pipe>();
-
+    //private Game game;
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private JPanel menuCard;
-    private JButton bQuit;
     private JButton bPlay;
-    private JPanel gameCard;
-    private JLabel lWelcome;
-    private JPanel pMap;
-    private JPanel pInformation;
-    private JPanel pButtons;
-    private JLabel lMechText;
-    private JLabel lSabText;
-    private JLabel lActionText;
-    private JLabel lMechPoints;
-    private JLabel lSabPoints;
-    private JLabel lActionPoints;
-    private JButton bMovePipe;
-    private JButton bMove;
-    private JButton bMakeSlipperry;
-    private JButton bMakeSticky;
-    private JButton bBreak;
-    private JButton bRepair;
-    private JButton bPlace;
-    private JButton bPickup;
-    private JButton bChangePumpDirection;
-    private JButton bEndGame;
-    private JButton bEndTurn;
 
     public GraphicsDesigner() {
         super("Game");
         this.setSize(1200, 600);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         this.setContentPane(cardPanel);
         this.setVisible(true);
@@ -59,50 +29,10 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         bPlay.addActionListener(this);
     }
 
-    private void drawNodes() {
-    }
-
-    private void drawEdges() {
-    }
-
-    //missing methods for logic of pulling and clicking
-
-    public void movePipe() {
-    }
-
-    public void endGame() {
-    }
-
-    public void makeSlippery() {
-    }
-
-    public void makeSticky() {
-    }
-
-    public void breakField() {
-    }
-
-    public void repairField() {
-    }
-
-    public void place() {
-    }
-
-    public void pickup() {
-    }
-
-    public void changePumpDirection() {
-    }
-
-    public void endTurn() {
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()) {
-            case "play" -> {
-                cardLayout.next(cardPanel);
-            }
+        if (e.getActionCommand().equals("play")) {
+            cardLayout.next(cardPanel);
         }
     }
 
@@ -123,10 +53,10 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
     private void $$$setupUI$$$() {
         cardPanel = new JPanel();
         cardPanel.setLayout(new CardLayout(0, 0));
-        menuCard = new JPanel();
+        JPanel menuCard = new JPanel();
         menuCard.setLayout(new GridBagLayout());
         cardPanel.add(menuCard, "menu");
-        bQuit = new JButton();
+        JButton bQuit = new JButton();
         bQuit.setText("Quit");
         GridBagConstraints gbc;
         gbc = new GridBagConstraints();
@@ -166,7 +96,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         menuCard.add(spacer3, gbc);
-        lWelcome = new JLabel();
+        JLabel lWelcome = new JLabel();
         lWelcome.setBackground(new Color(-16777216));
         lWelcome.setEnabled(true);
         Font lWelcomeFont = this.$$$getFont$$$("Arial", Font.PLAIN, 48, lWelcome.getFont());
@@ -185,10 +115,10 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.ipadx = 200;
         gbc.ipady = 50;
         menuCard.add(lWelcome, gbc);
-        gameCard = new JPanel();
+        JPanel gameCard = new JPanel();
         gameCard.setLayout(new GridBagLayout());
         cardPanel.add(gameCard, "game");
-        pInformation = new JPanel();
+        JPanel pInformation = new JPanel();
         pInformation.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -197,7 +127,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gameCard.add(pInformation, gbc);
-        lMechText = new JLabel();
+        JLabel lMechText = new JLabel();
         lMechText.setHorizontalAlignment(2);
         lMechText.setText("Mechanic Points: ");
         gbc = new GridBagConstraints();
@@ -210,7 +140,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.ipady = 30;
         gbc.insets = new Insets(30, 0, 0, 0);
         pInformation.add(lMechText, gbc);
-        lSabText = new JLabel();
+        JLabel lSabText = new JLabel();
         lSabText.setHorizontalAlignment(2);
         lSabText.setText("Saboteur Points: ");
         gbc = new GridBagConstraints();
@@ -223,7 +153,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.ipadx = 50;
         gbc.ipady = 30;
         pInformation.add(lSabText, gbc);
-        lActionText = new JLabel();
+        JLabel lActionText = new JLabel();
         lActionText.setHorizontalAlignment(2);
         lActionText.setText("Action Points Left In Round: ");
         gbc = new GridBagConstraints();
@@ -234,7 +164,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.ipadx = 50;
         gbc.ipady = 30;
         pInformation.add(lActionText, gbc);
-        lMechPoints = new JLabel();
+        JLabel lMechPoints = new JLabel();
         lMechPoints.setText("3");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
@@ -257,7 +187,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.VERTICAL;
         pInformation.add(spacer5, gbc);
-        lSabPoints = new JLabel();
+        JLabel lSabPoints = new JLabel();
         lSabPoints.setText("2");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
@@ -266,7 +196,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.ipadx = 50;
         gbc.ipady = 30;
         pInformation.add(lSabPoints, gbc);
-        lActionPoints = new JLabel();
+        JLabel lActionPoints = new JLabel();
         lActionPoints.setText("1");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
@@ -275,7 +205,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.ipadx = 50;
         gbc.ipady = 30;
         pInformation.add(lActionPoints, gbc);
-        pButtons = new JPanel();
+        JPanel pButtons = new JPanel();
         pButtons.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -284,7 +214,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.weighty = 3.0;
         gbc.fill = GridBagConstraints.BOTH;
         gameCard.add(pButtons, gbc);
-        bMovePipe = new JButton();
+        JButton bMovePipe = new JButton();
         bMovePipe.setHorizontalTextPosition(0);
         bMovePipe.setText("<html>Move<br>Pipe</html>");
         gbc = new GridBagConstraints();
@@ -292,14 +222,14 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bMovePipe, gbc);
-        bBreak = new JButton();
+        JButton bBreak = new JButton();
         bBreak.setText("Break");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bBreak, gbc);
-        bChangePumpDirection = new JButton();
+        JButton bChangePumpDirection = new JButton();
         bChangePumpDirection.setHorizontalTextPosition(0);
         bChangePumpDirection.setText("<html>Change<br>Pump<br>Direction</html>");
         gbc = new GridBagConstraints();
@@ -309,7 +239,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bChangePumpDirection, gbc);
-        bMakeSlipperry = new JButton();
+        JButton bMakeSlipperry = new JButton();
         bMakeSlipperry.setHorizontalTextPosition(0);
         bMakeSlipperry.setText("<html>Make<br>Slippery</html>");
         gbc = new GridBagConstraints();
@@ -318,7 +248,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.weightx = 2.0;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bMakeSlipperry, gbc);
-        bMakeSticky = new JButton();
+        JButton bMakeSticky = new JButton();
         bMakeSticky.setHorizontalTextPosition(0);
         bMakeSticky.setText("<html>Make<br>Sticky</html>");
         gbc = new GridBagConstraints();
@@ -327,7 +257,8 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.weightx = 2.0;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bMakeSticky, gbc);
-        bMove = new JButton();
+
+        JButton bMove = new JButton();
         bMove.setText("Move");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -336,7 +267,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.ipady = 50;
         pButtons.add(bMove, gbc);
-        bRepair = new JButton();
+        JButton bRepair = new JButton();
         bRepair.setText("Repair");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -344,21 +275,21 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.ipady = 50;
         pButtons.add(bRepair, gbc);
-        bPlace = new JButton();
+        JButton bPlace = new JButton();
         bPlace.setText("Place");
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bPlace, gbc);
-        bPickup = new JButton();
+        JButton bPickup = new JButton();
         bPickup.setText("Pickup");
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bPickup, gbc);
-        bEndGame = new JButton();
+        JButton bEndGame = new JButton();
         bEndGame.setHorizontalTextPosition(0);
         bEndGame.setText("<html>End<br>Game</html>");
         gbc = new GridBagConstraints();
@@ -366,7 +297,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bEndGame, gbc);
-        bEndTurn = new JButton();
+        JButton bEndTurn = new JButton();
         bEndTurn.setHorizontalTextPosition(0);
         bEndTurn.setText("<html>End<br>Turn</html>");
         gbc = new GridBagConstraints();
@@ -375,7 +306,7 @@ public class GraphicsDesigner extends JFrame implements ActionListener {
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.BOTH;
         pButtons.add(bEndTurn, gbc);
-        pMap = new JPanel();
+        JPanel pMap = new JPanel();
         pMap.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
