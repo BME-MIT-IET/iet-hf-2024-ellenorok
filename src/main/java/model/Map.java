@@ -1,4 +1,6 @@
-package iet.hf.ellenorok;
+package model;
+
+import display.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,7 +67,7 @@ public class Map extends JPanel {
                 Field f1 = p.getNeighbours().get(0);
                 DisplayNode n1 = nodes.stream().filter(n -> n.getGameReference() == f1).findFirst().orElse(null);
 
-                Rectangle r = new Rectangle((int)n1.container.getCenterX(), (int)n1.container.getCenterY(), 0,0);
+                Rectangle r = new Rectangle((int) n1.getContainer().getCenterX(), (int) n1.getContainer().getCenterY(), 0,0);
                 r.y += nodeHeight * 2; // push it away a bit
                 DisplayPipe edge = new DisplayPipe(p, n1, null, r); // connect edge to temporary container
 

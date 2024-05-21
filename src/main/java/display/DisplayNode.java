@@ -1,4 +1,6 @@
-package iet.hf.ellenorok;
+package display;
+
+import model.PlayerIcon;
 
 import java.awt.*;
 import java.awt.Graphics;

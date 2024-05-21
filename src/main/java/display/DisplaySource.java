@@ -1,4 +1,7 @@
-package iet.hf.ellenorok;
+package display;
+
+import model.Field;
+import model.Source;
 
 import java.awt.*;
 

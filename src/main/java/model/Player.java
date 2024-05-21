@@ -1,4 +1,4 @@
-package iet.hf.ellenorok;
+package model;
 
 import java.io.Serializable;
 

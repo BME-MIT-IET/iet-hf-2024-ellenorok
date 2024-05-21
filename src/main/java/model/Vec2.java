@@ -1,4 +1,4 @@
-package iet.hf.ellenorok;
+package model;
 
 /**
  * Kétdimenziós vektorok reprezentációja és azok műveleteinek megvalósítása.
@@ -40,7 +40,7 @@ public class Vec2 {
      * @param v2 jobb oldal
      * @return (v1 * v2)
      */
-    static float dot(Vec2 v1, Vec2 v2) {
+    public static float dot(Vec2 v1, Vec2 v2) {
         return v1.x * v2.x + v1.y * v2.y;
     }
 
@@ -50,7 +50,7 @@ public class Vec2 {
      * @param v2 jobb oldal
      * @return (v1 + v2)
      */
-    static Vec2 add(Vec2 v1, Vec2 v2) {
+    public static Vec2 add(Vec2 v1, Vec2 v2) {
         return new Vec2(v1.x + v2.x, v1.y + v2.y);
     }
 
@@ -60,7 +60,7 @@ public class Vec2 {
      * @param v2 jobb oldal
      * @return (v1 - v2)
      */
-    static Vec2 subtract(Vec2 v1, Vec2 v2) {
+    public static Vec2 subtract(Vec2 v1, Vec2 v2) {
         return new Vec2(v1.x - v2.x, v1.y - v2.y);
     }
 
@@ -69,7 +69,7 @@ public class Vec2 {
      * @param v a vektor, melynek hosszát keressük
      * @return sqrt(v.x * v.x + v.y * v.y)
      */
-    static float length(Vec2 v) {
+    public static float length(Vec2 v) {
         return (float) Math.sqrt(v.x * v.x + v.y * v.y);
     }
 
@@ -79,7 +79,7 @@ public class Vec2 {
      * @param s jobb oldal (skalár)
      * @return (v * s)
      */
-    static Vec2 multiply(Vec2 v, float s) {
+    public static Vec2 multiply(Vec2 v, float s) {
         return new Vec2(v.x * s, v.y * s);
     }
     /**
@@ -88,7 +88,7 @@ public class Vec2 {
      * @param s jobb oldal (skalár)
      * @return (v / s)
      */
-    static Vec2 divide(Vec2 v, float s) {
+    public static Vec2 divide(Vec2 v, float s) {
         return new Vec2(v.x / s, v.y / s);
     }
 
@@ -97,7 +97,7 @@ public class Vec2 {
      * @param v a kiindulási vektor
      * @return (v / length(v))
      */
-    static Vec2 normalize(Vec2 v) {
+    public static Vec2 normalize(Vec2 v) {
         return divide(v, length(v));
     }
 }

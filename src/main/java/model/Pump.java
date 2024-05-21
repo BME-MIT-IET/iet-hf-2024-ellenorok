@@ -1,4 +1,6 @@
-package iet.hf.ellenorok;
+package model;
+
+import interfaces.*;
 
 import java.io.Serializable;
 import java.util.Random;

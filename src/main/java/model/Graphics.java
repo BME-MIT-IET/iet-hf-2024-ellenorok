@@ -1,4 +1,8 @@
-package iet.hf.ellenorok;
+package model;
+
+import display.DisplayField;
+import display.DisplayNode;
+import display.DisplayPipe;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;

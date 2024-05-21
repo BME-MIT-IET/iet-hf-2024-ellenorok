@@ -1,8 +1,9 @@
-package iet.hf.ellenorok;
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import interfaces.*;
 
 /**
  * A jatek koreinek lepteteseert felelos. Ismerve az osszes olyan objektumot, amit leptetni vagy allapotat valtoztatni

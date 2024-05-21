@@ -1,4 +1,7 @@
-package iet.hf.ellenorok;
+package display;
+
+import model.Cistern;
+import model.Field;
 
 import java.awt.*;
 

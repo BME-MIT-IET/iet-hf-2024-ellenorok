@@ -1,4 +1,6 @@
-package iet.hf.ellenorok;
+import display.*;
+import interfaces.*;
+import model.*;
 public class Main {
     public static void main(String[] args) {
         defaultMap(); // load initial map

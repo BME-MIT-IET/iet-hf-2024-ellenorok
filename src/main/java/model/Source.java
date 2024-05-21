@@ -1,4 +1,6 @@
-package iet.hf.ellenorok;
+package model;
+
+import interfaces.Periodic;
 
 import java.io.Serializable;
 

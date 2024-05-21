@@ -1,4 +1,8 @@
-package iet.hf.ellenorok;
+package display;
+
+import model.Field;
+import model.Pipe;
+import model.PlayerIcon;
 
 import java.awt.*;
 import java.util.ArrayList;

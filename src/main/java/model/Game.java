@@ -1,9 +1,8 @@
-package iet.hf.ellenorok;
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Tarolja a jatek mindenkori allapotat, iranyitja azt. Ebbe bele kell erteni a jatekosok listajanak jegyzeset,

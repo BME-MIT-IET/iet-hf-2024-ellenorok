@@ -1,4 +1,4 @@
-package iet.hf.ellenorok;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
