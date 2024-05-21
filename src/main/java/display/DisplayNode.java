@@ -16,10 +16,10 @@ public abstract class DisplayNode extends DisplayField {
 
     /**
      * Új csomópont a paraméterként kapott bennfoglaló téglalappal
-     * @param _container a bennfoglaló téglalap
+     * @param container a bennfoglaló téglalap
      */
-    public DisplayNode(Rectangle _container) {
-        container = _container;
+    protected DisplayNode(Rectangle container) {
+        this.container = container;
     }
 
     /**

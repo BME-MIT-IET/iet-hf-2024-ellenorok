@@ -18,9 +18,9 @@ public class DisplaySource extends DisplayNode {
      */
     private final Color color = new Color(8, 78, 255, 255);
 
-    public DisplaySource(Rectangle _container, Source _s) {
-        super(_container);
-        s = _s;
+    public DisplaySource(Rectangle container, Source source) {
+        super(container);
+        s = source;
     }
 
     /**

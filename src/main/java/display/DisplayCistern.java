@@ -18,9 +18,9 @@ public class DisplayCistern extends DisplayNode {
      * A kirajzolt ciszterna megjelenítési és körvonal színe.
      */
     final Color color = new Color(160,82,45);
-    public DisplayCistern(Rectangle _container, Cistern _c) {
-        super(_container);
-        c = _c;
+    public DisplayCistern(Rectangle container, Cistern cistern) {
+        super(container);
+        c = cistern;
     }
 
     /**

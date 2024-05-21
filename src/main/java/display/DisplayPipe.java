@@ -91,7 +91,7 @@ public class DisplayPipe extends DisplayField {
 
         // lineTo -> lineFrom
         Vec2 directionVector = Vec2.normalize(Vec2.subtract(lineFrom, lineTo));
-        Vec2 normal = new Vec2(directionVector.y * -1, directionVector.x); // perpendicular to directionVector (still unit vector)
+        Vec2 normal = new Vec2(directionVector.getY() * -1, directionVector.getX()); // perpendicular to directionVector (still unit vector)
         normal = Vec2.multiply(normal, displayWidth / 2);
 
         Vec2 topLeft = Vec2.add(lineTo, normal);
@@ -107,10 +107,10 @@ public class DisplayPipe extends DisplayField {
 
         length = Vec2.length(Vec2.subtract(lineTo, lineFrom));
     }
-    public DisplayPipe(Pipe _p, DisplayNode _n1, DisplayNode _n2, Rectangle connectUnboundEnd) {
-        p = _p;
-        n1 = _n1;
-        n2 = _n2;
+    public DisplayPipe(Pipe pipe, DisplayNode node1, DisplayNode node2, Rectangle connectUnboundEnd) {
+        p = pipe;
+        n1 = node1;
+        n2 = node2;
         unboundEndConnection = connectUnboundEnd;
     }
 
@@ -204,7 +204,7 @@ public class DisplayPipe extends DisplayField {
     protected void setPlayerIcons() {
         playerIcons.clear();
 
-        if(p.getPlayers().size() == 0) return;
+        if(p.getPlayers().isEmpty()) return;
         Point c = getCenter();
         int dim = (int)displayWidth * 3;
         Rectangle r = new Rectangle(c.x - dim / 2, c.y - dim / 2, dim, dim);

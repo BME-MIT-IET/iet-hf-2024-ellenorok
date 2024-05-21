@@ -87,7 +87,7 @@ public class DisplayPump extends DisplayNode {
             Vec2 triangleBaseCenter = getTriangleClosestPosition(outDir);
 
             //noinspection SuspiciousNameCombination
-            Vec2 normal = new Vec2(-1.0f * outDir.y, outDir.x);
+            Vec2 normal = new Vec2(-1.0f * outDir.getY(), outDir.getX());
             Vec2 p1 = Vec2.add(triangleBaseCenter, Vec2.multiply(normal, directionTriangleBase / 2)); // base 1
             Vec2 p2 = Vec2.add(triangleBaseCenter, Vec2.multiply(normal, -1.0f * directionTriangleBase / 2)); // base 2
             Vec2 p3 = Vec2.add(triangleBaseCenter, Vec2.multiply(outDir, directionTriangleHeight));
@@ -103,7 +103,7 @@ public class DisplayPump extends DisplayNode {
             Vec2 triangleBaseCenter = Vec2.add(getTriangleClosestPosition(inDir), Vec2.multiply(inDir, directionTriangleHeight));
 
             //noinspection SuspiciousNameCombination
-            Vec2 normal = new Vec2(-1.0f * inDir.y, inDir.x);
+            Vec2 normal = new Vec2(-1.0f * inDir.getY(), inDir.getX());
             Vec2 p1 = Vec2.add(triangleBaseCenter, Vec2.multiply(normal, directionTriangleBase / 2)); // base 1
             Vec2 p2 = Vec2.add(triangleBaseCenter, Vec2.multiply(normal, -1.0f * directionTriangleBase / 2)); // base 2
             Vec2 p3 = Vec2.add(triangleBaseCenter, Vec2.multiply(inDir, -1.0f * directionTriangleHeight));
@@ -127,9 +127,9 @@ public class DisplayPump extends DisplayNode {
         return Vec2.normalize(Vec2.subtract(nodePos, center));
     }
 
-    public DisplayPump(Rectangle _container, Pump _p) {
-        super(_container);
-        p = _p;
+    public DisplayPump(Rectangle container, Pump pump) {
+        super(container);
+        p = pump;
     }
 
     /**
