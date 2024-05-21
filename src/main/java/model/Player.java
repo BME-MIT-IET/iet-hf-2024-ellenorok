@@ -12,13 +12,13 @@ public abstract class Player implements Serializable {
      */
     protected Field activeField;
 
-    public Player(){}
+    protected Player(){}
 
     /**
      * Megprobalja eltorni azt a mezot, amin eppen all
      */
     public void breakField() {
-        activeField._break();
+        activeField.breakField();
     }
 
     /**
@@ -54,8 +54,7 @@ public abstract class Player implements Serializable {
      * @see Field
      */
     public void moveToField(Field f) {
-        if(Game.getInstance().getActionNumber() > 0)
-            if(!activeField.isSticky())
+        if(Game.getInstance().getActionNumber() > 0 && !activeField.isSticky())
                 f.accept(this);
     }
 

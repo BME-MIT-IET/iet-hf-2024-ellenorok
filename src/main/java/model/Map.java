@@ -15,31 +15,31 @@ public class Map extends JPanel {
     /**
      * A panelen megjelenő pálya szélessége.
      */
-    private final int sizeX = 1500;
+    private static final int SIZEX = 1500;
     /**
      * A panel megjelenő pálya magassága.
      */
-    private final int sizeY = 700;
+    private static final int SIZEY = 700;
     /**
      *  A panelen megjelenő csomópontok szélessége.
      */
-    private final int nodeWidth = 50;
+    private static final int NODEWIDTH = 50;
     /**
      * A panelen megjelenő csomópontok magassága.
      */
-    private final int nodeHeight = 50;
+    private static final int NODEHEIGHT = 50;
     /**
      * Amennyiben a felhasználó éppen Drag&Drop operációt végez, a mozgatott csomópont referenciája, egyébként null.
      */
-    private DisplayNode draggingNode = null;
+    private transient DisplayNode draggingNode = null;
     /**
      *  A kirajzolt csomópontok listája.
      */
-    protected List<DisplayNode> nodes = new ArrayList<>();
+    protected transient List<DisplayNode> nodes = new ArrayList<>();
     /**
      * A kirajzolt élek (csövek) listája.
      */
-    protected List<DisplayPipe> edges = new ArrayList<>();
+    protected transient List<DisplayPipe> edges = new ArrayList<>();
 
     /**
      * A kapott pipes lista alapján létrehozza a hozzájuk tartozó DisplayNode elemeket és eltárolja őket az edges
@@ -66,9 +66,11 @@ public class Map extends JPanel {
             if(p.getNeighbours().size() == 1) { // Only 1 end of pipe connected
                 Field f1 = p.getNeighbours().get(0);
                 DisplayNode n1 = nodes.stream().filter(n -> n.getGameReference() == f1).findFirst().orElse(null);
-
+                if (n1 == null) {
+                    return;
+                }
                 Rectangle r = new Rectangle((int) n1.getContainer().getCenterX(), (int) n1.getContainer().getCenterY(), 0,0);
-                r.y += nodeHeight * 2; // push it away a bit
+                r.y += NODEHEIGHT * 2; // push it away a bit
                 DisplayPipe edge = new DisplayPipe(p, n1, null, r); // connect edge to temporary container
 
                 edges.add(edge);
@@ -119,9 +121,9 @@ public class Map extends JPanel {
         });
 
         // Nodes
-        Rectangle cursor = new Rectangle(0,0,nodeWidth,nodeHeight);
-        final int nodeDistanceX = sizeX / Collections.max(Arrays.asList(cisterns.size(), pumps.size(), pipes.size())); // dynamic column amount
-        final int nodeDistanceY = sizeY / 3; // Cistern, Pump, Source => 3 rows
+        Rectangle cursor = new Rectangle(0,0, NODEWIDTH, NODEHEIGHT);
+        final int nodeDistanceX = SIZEX / Collections.max(Arrays.asList(cisterns.size(), pumps.size(), pipes.size())); // dynamic column amount
+        final int nodeDistanceY = SIZEY / 3; // Cistern, Pump, Source => 3 rows
 
         for (Source s: sources) {
             DisplaySource n = new DisplaySource(new Rectangle(cursor), s); // pass by value, not by reference
@@ -188,10 +190,10 @@ public class Map extends JPanel {
         Point newPumpPos = null;
         // - 1 pipe
         for (DisplayPipe edge : edges) {
-            if(!pipes.stream().anyMatch(p -> p == edge.getGameReference())) {
+            if(pipes.stream().noneMatch(p -> p == edge.getGameReference())) {
                 newPumpPos = edge.getCenter(); // the new pump is drawn to the center of the removed pipe
-                newPumpPos.x = newPumpPos.x - nodeWidth / 2;
-                newPumpPos.y = newPumpPos.y - nodeHeight / 2;
+                newPumpPos.x = newPumpPos.x - NODEWIDTH / 2;
+                newPumpPos.y = newPumpPos.y - NODEHEIGHT / 2;
                 edges.remove(edge); // the old pipe is no longer in the game
                 break;
             }
@@ -199,8 +201,8 @@ public class Map extends JPanel {
         if(newPumpPos == null) return; // no pipe missing => no pump placed, returning
         // + 1 pump
         for (Pump p: pumps) {
-            if(!nodes.stream().anyMatch(displayNode -> displayNode.getGameReference() == p)) {
-                Rectangle container = new Rectangle(newPumpPos.x, newPumpPos.y, nodeWidth, nodeHeight);
+            if(nodes.stream().noneMatch(displayNode -> displayNode.getGameReference() == p)) {
+                Rectangle container = new Rectangle(newPumpPos.x, newPumpPos.y, NODEWIDTH, NODEHEIGHT);
                 DisplayPump n = new DisplayPump(container, p);
                 nodes.add(n); // add new pipe to our nodes
                 break;
@@ -246,8 +248,8 @@ public class Map extends JPanel {
         }
 
         // move target node
-        draggingNode.getContainer().x = e.getX() - nodeWidth / 2;
-        draggingNode.getContainer().y = e.getY() - nodeHeight / 2;
+        draggingNode.getContainer().x = e.getX() - NODEWIDTH / 2;
+        draggingNode.getContainer().y = e.getY() - NODEHEIGHT / 2;
 
         repaint();
     }

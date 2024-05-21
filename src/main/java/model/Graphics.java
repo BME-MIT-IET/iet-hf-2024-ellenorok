@@ -11,24 +11,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Graphics extends JFrame {
+    private transient Logger logger;
     /**
      * all the GUI elements
      */
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private JPanel menuCard;
     private JButton bQuit;
     private JButton bPlay;
-    private JPanel gameCard;
-    private JLabel lWelcome;
-    private Map pMap;
-    private JPanel pInformation;
-    private JPanel pButtons;
-    private JLabel lMechText;
-    private JLabel lSabText;
-    private JLabel lActionText;
+    private final Map pMap;
     private JLabel lMechPoints;
     private JLabel lSabPoints;
     private JLabel lActionPoints;
@@ -46,10 +41,7 @@ public class Graphics extends JFrame {
     private JButton bEndTurn;
 
     //logic
-    private int moveIC = 0; // move interaction counter
-    private int movePipeIC = 0; // move pipe interaction counter
-    private int changePumpDirectionIC = 0; // change pump direction interaction counter
-    private ArrayList<DisplayField> clicked = new ArrayList<>();
+    private final transient ArrayList<DisplayField> clicked = new ArrayList<>();
 
     private void modelUpdated(String operationName) {
         lCustomText.setText("<html>Last operation was: " + operationName + ".</html>");
@@ -70,7 +62,7 @@ public class Graphics extends JFrame {
         super("Game");
         this.setSize(1200, 600);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         Game.getInstance().play();
 
@@ -117,16 +109,16 @@ public class Graphics extends JFrame {
         bMove.addActionListener(e -> move());
     }
     public void move() {
-        System.out.println(clicked);
+        logger.log(Level.INFO, "{}", clicked);
 
         //This call is valid only if there was an appointed object
-        int clicked_count = clicked.size();
-        if(clicked_count >= 1 && clicked.get(clicked_count-1) != null) {
+        int clickedCount = clicked.size();
+        if(clickedCount >= 1 && clicked.get(clickedCount-1) != null) {
 
             //getGameReference returns the logic behind the interpreter
             //the graphics are modeled based on the logic behind it
             Game.getInstance().getActivePlayer().moveToField(
-                    clicked.get(clicked_count-1).getGameReference());
+                    clicked.get(clickedCount-1).getGameReference());
 
             //If the procedure was successful then we clear the list
             clicked.clear();
@@ -137,21 +129,21 @@ public class Graphics extends JFrame {
     }
 
     public void movePipe() {
-        System.out.println(clicked);
+        logger.log(Level.INFO, "{}", clicked);
 
         //This call is valid only if there was an appointed object
-        int clicked_count = clicked.size();
+        int clickedCount = clicked.size();
 
         //If the second to last was a pipe that indicates that this
         // is a pipe with one end levitating. Then we need only 2 clicks.
-        if(clicked_count >= 2 && clicked.get(clicked_count-2).getPipe() != null){
+        if(clickedCount >= 2 && clicked.get(clickedCount-2).getPipe() != null){
             //The first one must be a pipe
-            Pipe pipe = clicked.get(clicked_count - 2).getPipe();
+            Pipe pipe = clicked.get(clickedCount - 2).getPipe();
 
             //The newEnd can be null pointer as well. In that case the pipe will hang.
             Field to = null;
-            if (clicked.get(clicked_count - 1) != null)
-                to = clicked.get(clicked_count - 1).getGameReference();
+            if (clicked.get(clickedCount - 1) != null)
+                to = clicked.get(clickedCount - 1).getGameReference();
 
             //This case if only jogos if pipe has fewer neighbours than 2
             if(pipe.getNeighbours().size() < 2)
@@ -165,19 +157,19 @@ public class Graphics extends JFrame {
         }
 
         //in case of a pipe that is connected from both ends
-        else if(clicked_count >= 3) {
+        else if(clickedCount >= 3) {
             //The first one must be a pipe
-            if (clicked.get(clicked_count - 3) == null) return;
-            Pipe pipe = clicked.get(clicked_count - 3).getPipe();
+            if (clicked.get(clickedCount - 3) == null) return;
+            Pipe pipe = clicked.get(clickedCount - 3).getPipe();
 
             //old end cannot be null
-            if (clicked.get(clicked_count - 2) == null) return;
-            Field from = clicked.get(clicked_count - 2).getGameReference();
+            if (clicked.get(clickedCount - 2) == null) return;
+            Field from = clicked.get(clickedCount - 2).getGameReference();
 
             //The newEnd can be null pointer as well. In that case the pipe will hang.
             Field to = null;
-            if (clicked.get(clicked_count - 1) != null)
-                to = clicked.get(clicked_count - 1).getGameReference();
+            if (clicked.get(clickedCount - 1) != null)
+                to = clicked.get(clickedCount - 1).getGameReference();
 
             //Invoking the function that with the logic responsibility
             if (pipe != null && from != null)
@@ -249,24 +241,24 @@ public class Graphics extends JFrame {
     }
 
     public void changePumpDirection() {
-        System.out.println(clicked);
+        logger.log(Level.INFO, "{}", clicked);
 
         //This call is valid only if there was an appointed object
-        int clicked_count = clicked.size();
+        int clickedCount = clicked.size();
 
         //If there were two objects assigned then is good
-        if(clicked_count >= 2) {
+        if(clickedCount >= 2) {
             //We read the last 2 object that were clicked
-            boolean not_null = clicked.get(clicked_count-1) != null && clicked.get(clicked_count-2) != null;
+            boolean notNull = clicked.get(clickedCount-1) != null && clicked.get(clickedCount-2) != null;
 
             //If there was a missclick than ignore
-            if(!not_null) return;
+            if(!notNull) return;
 
             //If getPipe returns null the input/output is null;
             //First click in second click out
             Game.getInstance().getActivePlayer().changePumpDirection(
-                    clicked.get(clicked_count-2).getPipe(),
-                    clicked.get(clicked_count-1).getPipe()
+                    clicked.get(clickedCount-2).getPipe(),
+                    clicked.get(clickedCount-1).getPipe()
             );
             //If the procedure was successful then we clear the list
             clicked.clear();
@@ -293,7 +285,7 @@ public class Graphics extends JFrame {
     public void messagePopup(String message) {
         JDialog popup = new JDialog(this, "Game Message");
         popup.setLocationRelativeTo(null);
-        popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        popup.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         popup.setSize(200, 100);
         JLabel labelMessage = new JLabel(message);
         popup.add(labelMessage);
@@ -305,19 +297,19 @@ public class Graphics extends JFrame {
 
         DisplayPipe p = pMap.getPipeFromClick(e.getX(), e.getY());
         if(p != null) {
-            System.out.println("Clicked on pipe: " + p.getGameReference()); //TODO
+            logger.log(Level.INFO, "Clicked on pipe: {}", p.getGameReference());
             clicked.add(p);
         }
 
 
         DisplayNode n = pMap.getNodeFromClick(e.getX(), e.getY());
         if(n != null) {
-            System.out.println("Clicked on node: " + n.getGameReference()); //TODO
+            logger.log(Level.INFO, "Clicked on node: {}", n.getGameReference());
             clicked.add(n);
         }
 
         if(p == null && n == null) {
-            System.out.println("Clicked outside of any drawn nodes / pipes");
+            logger.log(Level.WARNING, "Clicked outside of any drawn nodes / pipes");
             clicked.add(null);
         }
     }
@@ -330,7 +322,7 @@ public class Graphics extends JFrame {
     private void setup() {
         cardPanel = new JPanel();
         cardPanel.setLayout(new CardLayout(0, 0));
-        menuCard = new JPanel();
+        JPanel menuCard = new JPanel();
         menuCard.setLayout(new GridBagLayout());
         cardPanel.add(menuCard, "menu");
         bQuit = new JButton();
@@ -373,7 +365,7 @@ public class Graphics extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         menuCard.add(spacer3, gbc);
-        lWelcome = new JLabel();
+        JLabel lWelcome = new JLabel();
         lWelcome.setBackground(new Color(-16777216));
         lWelcome.setEnabled(true);
         Font lWelcomeFont = this.getFont("Arial", Font.PLAIN, 48, lWelcome.getFont());
@@ -392,7 +384,7 @@ public class Graphics extends JFrame {
         gbc.ipadx = 200;
         gbc.ipady = 50;
         menuCard.add(lWelcome, gbc);
-        gameCard = new JPanel();
+        JPanel gameCard = new JPanel();
         gameCard.setLayout(new GridBagLayout());
         cardPanel.add(gameCard, "game");
 
@@ -406,7 +398,7 @@ public class Graphics extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gameCard.add(pMap, gbc);
 
-        pInformation = new JPanel();
+        JPanel pInformation = new JPanel();
         pInformation.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -415,7 +407,7 @@ public class Graphics extends JFrame {
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gameCard.add(pInformation, gbc);
-        lMechText = new JLabel();
+        JLabel lMechText = new JLabel();
         lMechText.setHorizontalAlignment(2);
         lMechText.setText("Mechanic Points: ");
         gbc = new GridBagConstraints();
@@ -428,7 +420,7 @@ public class Graphics extends JFrame {
         gbc.ipady = 30;
         gbc.insets = new Insets(30, 0, 0, 0);
         pInformation.add(lMechText, gbc);
-        lSabText = new JLabel();
+        JLabel lSabText = new JLabel();
         lSabText.setHorizontalAlignment(2);
         lSabText.setText("Saboteur Points: ");
         gbc = new GridBagConstraints();
@@ -441,7 +433,7 @@ public class Graphics extends JFrame {
         gbc.ipadx = 50;
         gbc.ipady = 30;
         pInformation.add(lSabText, gbc);
-        lActionText = new JLabel();
+        JLabel lActionText = new JLabel();
         lActionText.setHorizontalAlignment(2);
         lActionText.setText("Action Points Left In Round: ");
         gbc = new GridBagConstraints();
@@ -503,7 +495,7 @@ public class Graphics extends JFrame {
         gbc.ipady = 30;
         pInformation.add(lCustomText, gbc);
 
-        pButtons = new JPanel();
+        JPanel pButtons = new JPanel();
         pButtons.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.gridx = 1;

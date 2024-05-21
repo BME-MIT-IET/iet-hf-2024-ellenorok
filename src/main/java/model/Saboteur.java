@@ -24,8 +24,7 @@ public class Saboteur extends Player implements Serializable {
      */
     @Override
     public void moveToField(Field f) {
-        if(Game.getInstance().getActionNumber() > 0)
-            if(!activeField.isSticky())
+        if(Game.getInstance().getActionNumber() > 0 && !activeField.isSticky())
                 f.accept(this);
     }
 
@@ -33,6 +32,8 @@ public class Saboteur extends Player implements Serializable {
      * A Saboteur jatekosok nem tudnak csovet megjavitani, csak placeholder
      */
     @Override
-    public void repairField() {}
+    public void repairField() {
+        // Saboteur nem tud javitani
+    }
 
 }

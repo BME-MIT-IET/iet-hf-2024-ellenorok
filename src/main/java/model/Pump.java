@@ -5,11 +5,15 @@ import interfaces.*;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A jatekszabalyok szerinti pumpa funkcioit valositja meg
  */
 public class Pump extends Field implements Periodic, Serializable {
+    private final Random random = new Random();
+    private transient Logger logger;
     /**
      * A bemeneti csove
      */
@@ -56,25 +60,24 @@ public class Pump extends Field implements Periodic, Serializable {
     public void step() {
         if(Game.getInstance().getRandom()) {
             if(!isBroken) {
-                Random r = new Random();
-                isBroken = r.nextBoolean() && r.nextBoolean() && r.nextBoolean() && r.nextBoolean() && r.nextBoolean();
+                isBroken = random.nextBoolean() && random.nextBoolean() && random.nextBoolean() && random.nextBoolean() && random.nextBoolean();
             }
         } else {
-            System.out.println("Eltorjon a pumpa?");
+            logger.log(Level.INFO, "Eltorjon a pumpa?");
             Scanner scanner = new Scanner(System.in);
             String valasz = scanner.nextLine();
             if(valasz.equals("Igen")){
                 isBroken = true;
             } else if(!valasz.equals("Nem")){
-                System.out.println("Helytelen valasz, ezert nem torik el");
+                logger.log(Level.WARNING, "Helytelen valasz, ezert nem torik el");
             }
         }
         if(!isBroken && input != null && output != null) {
             output.setNewWaterState(hasStoredWater);
             input.giveWater(this);
-        } else if(!isBroken && input != null && output == null) {
+        } else if(!isBroken && input != null) {
             input.giveWater(this);
-        } else if(!isBroken && input == null && output != null) {
+        } else if(!isBroken && output != null) {
             output.setNewWaterState(hasStoredWater);
         } else if(isBroken && output != null) {
             //Ha elromlik akkor a tartalybol sem tud adni vizet

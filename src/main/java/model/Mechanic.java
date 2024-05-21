@@ -20,11 +20,8 @@ public class Mechanic extends Player implements Serializable {
 
     public Mechanic(Field field, Pump pump){ activeField = field; carriedPump = pump; }
 
-    public boolean HasCarriedPump(){
-        if(carriedPump != null){
-            return true;
-        }
-        return false;
+    public boolean hasCarriedPump(){
+        return carriedPump != null;
     }
 
     /**
@@ -40,6 +37,7 @@ public class Mechanic extends Player implements Serializable {
      */
     @Override
     public void breakField() {
+        // Mechanic nem tud lyukasztani
     }
 
     /**
@@ -134,8 +132,7 @@ public class Mechanic extends Player implements Serializable {
      */
     @Override
     public void moveToField(Field f) {
-        if(Game.getInstance().getActionNumber() > 0)
-            if(!activeField.isSticky())
+        if(Game.getInstance().getActionNumber() > 0 && !activeField.isSticky())
                 f.accept(this);
     }
 }

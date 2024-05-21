@@ -9,7 +9,7 @@ import java.util.List;
  * a mezok szamontartasat, az eppen soron levo jatekos es a csapatok pontjainak szamontartasat
  */
 public class Game implements Serializable {
-    final int ROUND_BEGIN_ACTION_NUMBER = 3;
+    static final int ROUND_BEGIN_ACTION_NUMBER = 3;
     /**
      * Az osztaly egyetlen peldanya
      */
@@ -112,6 +112,7 @@ public class Game implements Serializable {
      * Megallitja a jatekot
      */
     public void end() {
+        // Game ends
     }
 
     /**
@@ -223,7 +224,7 @@ public class Game implements Serializable {
             return;
         }
 
-        if(!oldEnd.equals(newEnd)) {
+        if(oldEnd != null && !oldEnd.equals(newEnd)) {
             oldEnd.removeNeighbor(p);
             p.removeNeighbor(oldEnd);
             //if new end is null then the player unplugs the pipe

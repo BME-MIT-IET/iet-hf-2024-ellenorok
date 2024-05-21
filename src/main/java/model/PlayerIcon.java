@@ -8,9 +8,9 @@ public class PlayerIcon {
     final Color p1Color = new Color(255,0,0);
     final Color p2Color = new Color(196, 185, 71);
 
-    public PlayerIcon(Rectangle _container, Player _p) {
-        container = _container;
-        p = _p;
+    public PlayerIcon(Rectangle container, Player player) {
+        this.container = container;
+        p = player;
     }
     public void draw(java.awt.Graphics g) {
         if(Game.getInstance().getMechanics().contains(p)) {

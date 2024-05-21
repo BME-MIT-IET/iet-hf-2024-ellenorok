@@ -11,12 +11,12 @@ public abstract class Field implements Serializable {
     /**
      * Szamontartja a szomszedos mezoket
      */
-    protected List<Field> neighbors;
+    protected transient List<Field> neighbors;
 
     /**
      * Szamontartja, hogy milyen jatekosok allnak rajta
      */
-    protected List<Player> players;
+    protected transient List<Player> players;
 
     /**
      * Visszaadja a szomszedos mezoket
@@ -30,9 +30,9 @@ public abstract class Field implements Serializable {
         return  players;
     }
 
-    public Field(){
-        neighbors = new ArrayList<Field>();
-        players = new ArrayList<Player>();
+    protected Field(){
+        neighbors = new ArrayList<>();
+        players = new ArrayList<>();
     }
 
     /**
@@ -117,7 +117,7 @@ public abstract class Field implements Serializable {
     /**
      * Ures implementacio, a megfelelo leszarmazottakban van implementalva
      */
-    public void _break() {}
+    public void breakField() {}
 
     /**
      * Ures implementacio, a megfelelo leszarmazottakban van implementalva

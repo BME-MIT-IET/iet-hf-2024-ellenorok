@@ -7,11 +7,28 @@ public class Vec2 {
     /**
      * A vektor x koordinátája.
      */
-    public float x;
+    private float x;
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
     /**
      * A vektor y koordinátája.
      */
-    public float y;
+    private float y;
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
 
     public Vec2(float x, float y) {
         this.x = x;

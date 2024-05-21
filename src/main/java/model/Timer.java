@@ -56,8 +56,8 @@ public class Timer implements Serializable {
     }
 
     private Timer() {
-        periodics = new ArrayList<Periodic>();
-        statefuls = new ArrayList<Stateful>();
+        periodics = new ArrayList<>();
+        statefuls = new ArrayList<>();
     }
 
     /**

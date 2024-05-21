@@ -6,12 +6,16 @@ import interfaces.Stateful;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Szamontartja, hogy van-e benne viz. Ezen kivul azt is jegyzi, hogy el van-e torve es ha igen es viz van benne,
  * akkor a kor vegen pontot ad a szabotoroknek
  */
 public class Pipe extends Field implements Periodic, Stateful, Serializable {
+    private final Random random = new Random();
+    private transient Logger logger;
     /**
      * Van-e benne viz, mindenki ezt a valtozot olvassa
      */
@@ -43,8 +47,6 @@ public class Pipe extends Field implements Periodic, Stateful, Serializable {
      */
     private boolean isBroken;
 
-    public Pipe(){}
-
     /**
      * Ha nem all rajta mas jatekos es a parameterben kapott jatekos egy mellette levo mezon all, akkor onmagara
      * lepteti ot es hozzaadja a players listához
@@ -54,11 +56,11 @@ public class Pipe extends Field implements Periodic, Stateful, Serializable {
      */
     @Override
     public void accept(Player p) {
-        if(players.size() == 0) {
+        if(players.isEmpty()) {
             Field oldfield = p.getActiveField();
             if(neighbors.contains(oldfield)) {
                 if(slipperyCounter > 0 && !Game.getInstance().getRandom()){
-                    System.out.println("Melyik oldalra csusszak? Regi vagy uj?");
+                    logger.log(Level.INFO, "Melyik oldalra csusszak? Regi vagy uj?");
                     Scanner scanner = new Scanner(System.in);
                     String valasz = scanner.nextLine();
                     if(valasz.equals("regi")){
@@ -74,12 +76,11 @@ public class Pipe extends Field implements Periodic, Stateful, Serializable {
                         }
                     }
                     else {
-                        System.out.println("Helytelen valasz, ezert a regire csuszik.");
+                        logger.log(Level.INFO, "Helytelen valasz, ezert a regire csuszik.");
                         p.swapField(oldfield);
                         oldfield.addPlayer(p);
                     }
                 } else if(slipperyCounter > 0 && Game.getInstance().getRandom()) {
-                    Random random = new Random();
                     if(random.nextBoolean()){
                         for(Field f : neighbors){
                             if(!f.equals(oldfield)){
@@ -131,7 +132,6 @@ public class Pipe extends Field implements Periodic, Stateful, Serializable {
             isBroken = false;
             breakProofCounter = 3;
             if(Game.getInstance().getRandom()) {
-                Random random = new Random();
                 breakProofCounter +=random.nextInt(2);
             }
         }
@@ -141,7 +141,7 @@ public class Pipe extends Field implements Periodic, Stateful, Serializable {
      * Ha a cso mar regen volt megjavitva es nem torott, akkor eltori a csovet es levon egy akciot
      */
     @Override
-    public void _break() {
+    public void breakField() {
         if(!isBroken && breakProofCounter == 0) {
             Game.getInstance().actionTaken();
 

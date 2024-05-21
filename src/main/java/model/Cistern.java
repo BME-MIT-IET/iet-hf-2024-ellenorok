@@ -10,6 +10,7 @@ import java.util.Scanner;
  * tarolja, hogy van-e rajta meg fel nem vett pumpa, melyet a szerelok felvehetnek
  */
 public class Cistern extends Field implements Periodic {
+    private Random random = new Random();
     /**
      * A bemeneti csove
      */
@@ -75,23 +76,21 @@ public class Cistern extends Field implements Periodic {
      * Tovabba veletlenszeruen letrehoz egy pumpat, ha nincs rajta
      */
     public void step() {
-        if(spawnedPump == null) {
-            if(Game.getInstance().getRandom()) {
-                Random rd = new Random();
-                boolean b = rd.nextBoolean() && rd.nextBoolean();
-                if(b) {
+        if (spawnedPump == null) {
+            if (Game.getInstance().getRandom()) {
+                boolean b = random.nextBoolean() && random.nextBoolean();
+                if (b) {
                     spawnedPump = new Pump();
                 }
             } else {
                 System.out.println("Spawnoljon pumpa?");
                 Scanner scanner = new Scanner(System.in);
                 String valasz = scanner.nextLine();
-                if(valasz.equals("Igen")){
+                if (valasz.equals("Igen")) {
                     spawnedPump = new Pump();
-                } else {
-                    if(!valasz.equals("Nem")) {
-                        System.out.println("Helytelen valasz, ezert nem spawnolodik pumpa.");
-                    }
+                }
+                if (!valasz.equals("Nem")) {
+                    System.out.println("Helytelen valasz, ezert nem spawnolodik pumpa.");
                 }
             }
         }
