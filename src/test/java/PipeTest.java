@@ -11,7 +11,6 @@ class PipeTest {
 
     private Pipe pipe1;
     private Cistern cistern1;
-    private Pump pump1;
     private Mechanic mechanic1;
     private Saboteur saboteur1;
     private Game g;
@@ -20,7 +19,7 @@ class PipeTest {
     void CreateGame(){
         pipe1 = new Pipe();
         cistern1 = new Cistern(pipe1);
-        pump1 = new Pump(null, pipe1);
+        Pump pump1 = new Pump(null, pipe1);
         mechanic1 = new Mechanic();
         saboteur1 = new Saboteur();
        // connect components
@@ -78,7 +77,7 @@ class PipeTest {
 
         saboteur1.breakField();     //Saboteur trys to break pipe1
 
-        assertEquals(false, pipe1.isBroken());
+        assertFalse(pipe1.isBroken());
     }
 
     

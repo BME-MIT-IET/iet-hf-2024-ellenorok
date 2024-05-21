@@ -4,7 +4,7 @@ import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class GameTest {
+class GameTest {
 
     private Pipe pipe1;
     private Cistern cistern1;

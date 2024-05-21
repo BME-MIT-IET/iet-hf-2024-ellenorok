@@ -33,7 +33,7 @@ public class StepDefinitionPlayerGetsPoint {
 	    	game.setActivePlayer(mechanic);
 		    mechanic.setActiveField(pipe);
 		    pipe.addPlayer(mechanic);
-		    pipe._break();
+		    pipe.breakField();
 	    }
 	    else {
 	    	saboteur = new Saboteur();

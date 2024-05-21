@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PlayerTest {
+class PlayerTest {
     
     private Pipe pipe1;
     private Cistern cistern1;
@@ -49,9 +49,9 @@ public class PlayerTest {
         //add players to a field
         saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
 
-        assertEquals(false, ((Pipe)saboteur1.getActiveField()).isBroken());
+        assertFalse(((Pipe) saboteur1.getActiveField()).isBroken());
         saboteur1.breakField();
-        assertEquals(true, ((Pipe)saboteur1.getActiveField()).isBroken());
+        assertTrue(((Pipe) saboteur1.getActiveField()).isBroken());
     }
 
     @Test
@@ -59,18 +59,18 @@ public class PlayerTest {
         pipe1.setBroken(true);
         
         mechanic1.setActiveField(pipe1); pipe1.addPlayer(mechanic1);
-        assertEquals(true, ((Pipe)mechanic1.getActiveField()).isBroken());
+        assertTrue(((Pipe) mechanic1.getActiveField()).isBroken());
         mechanic1.repairField();
-        assertEquals(false, ((Pipe)mechanic1.getActiveField()).isBroken());
+        assertFalse(((Pipe) mechanic1.getActiveField()).isBroken());
     }
 
     @Test
     void SaboteurMakesPipeSlipperyTest() {
        
-        saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);        
-        assertEquals(false, ((Pipe)saboteur1.getActiveField()).isSlippery());
+        saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
+        assertFalse(((Pipe) saboteur1.getActiveField()).isSlippery());
         saboteur1.makeSlippery();
-        assertEquals(true, ((Pipe)saboteur1.getActiveField()).isSlippery());
+        assertTrue(((Pipe) saboteur1.getActiveField()).isSlippery());
 
     }
     
@@ -78,9 +78,9 @@ public class PlayerTest {
     void MakesStickyWasFreshlyAppliedTest() {
         saboteur1.setActiveField(pipe1); pipe1.addPlayer(saboteur1);
 
-        assertEquals(false, pipe1.isSticky());
+        assertFalse(pipe1.isSticky());
         saboteur1.makeSticky();
-        assertEquals(false, pipe1.isSticky());      //Pipe is not sticky, because makeSticky was freshly applied, and the player needs to step off.
+        assertFalse(pipe1.isSticky());      //Pipe is not sticky, because makeSticky was freshly applied, and the player needs to step off.
     }
 
     @Test
@@ -105,11 +105,11 @@ public class PlayerTest {
 
         mechanic1.setActiveField(cistern1); cistern1.addPlayer(mechanic1);
 
-        assertEquals(false, mechanic1.HasCarriedPump());
+        assertEquals(false, mechanic1.hasCarriedPump());
 
         mechanic1.pickup();
 
-        assertEquals(true, mechanic1.HasCarriedPump());
+        assertEquals(true, mechanic1.hasCarriedPump());
     }
 
     @Test
@@ -118,12 +118,12 @@ public class PlayerTest {
         g.setActivePlayer(mechanic1);
 
         assertTrue(cistern1.hasPump());
-        assertFalse(mechanic1.HasCarriedPump());
+        assertFalse(mechanic1.hasCarriedPump());
         assertEquals(Cistern.class, mechanic1.getActiveField().getClass());
 
         mechanic1.pickup();
 
-        assertTrue(mechanic1.HasCarriedPump());
+        assertTrue(mechanic1.hasCarriedPump());
 
         mechanic1.moveToField(pipe1);
 
@@ -132,7 +132,7 @@ public class PlayerTest {
         mechanic1.place();
 
         assertEquals(Pump.class, mechanic1.getActiveField().getClass());
-        assertFalse(mechanic1.HasCarriedPump());
+        assertFalse(mechanic1.hasCarriedPump());
         assertFalse(cistern1.hasPump());
     }
 
