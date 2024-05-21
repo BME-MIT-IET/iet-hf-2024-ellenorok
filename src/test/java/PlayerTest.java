@@ -1,5 +1,4 @@
-package iet.hf.ellenorok;
-
+import model.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -93,11 +92,11 @@ public class PlayerTest {
 
         g.setActivePlayer(mechanic1);
 
-        assertNotEquals(Pump.class, mechanic1.activeField.getClass());
+        assertNotEquals(Pump.class, mechanic1.getActiveField().getClass());
 
         mechanic1.place();          //Mechanic trys to place a pump
 
-        assertEquals(Pump.class, mechanic1.activeField.getClass());
+        assertEquals(Pump.class, mechanic1.getActiveField().getClass());
     }
 
     @Test

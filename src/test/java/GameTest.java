@@ -1,7 +1,6 @@
-package iet.hf.ellenorok;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
