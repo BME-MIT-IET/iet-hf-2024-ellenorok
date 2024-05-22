@@ -2,7 +2,6 @@ import model.*;
 public class Main {
     public static void main(String[] args) {
         defaultMap(); // load initial map
-        //Test18();
         Graphics graphics = new Graphics();
     }
 

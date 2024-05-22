@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Graphics extends JFrame {
-    private transient Logger logger;
+    private static final Logger logger = Logger.getLogger("logger");
     /**
      * all the GUI elements
      */

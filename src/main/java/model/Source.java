@@ -3,11 +3,14 @@ package model;
 import interfaces.Periodic;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Vegtelen vizforrasnak szamit. A kimeneten mindig folyik a viz
  */
 public class Source extends Field implements Periodic, Serializable {
+    private static final Logger logger = Logger.getLogger("logger");
     /**
      * A kimeneti csove
      */
@@ -37,7 +40,7 @@ public class Source extends Field implements Periodic, Serializable {
         try {
             output = (Pipe) p;
         } catch(Exception e) {
-            System.out.print("Error casting field to pipe.");
+            logger.log(Level.WARNING, "Error casting field to pipe.");
         }
 
     }

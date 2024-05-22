@@ -3,12 +3,15 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Tarolja a jatek mindenkori allapotat, iranyitja azt. Ebbe bele kell erteni a jatekosok listajanak jegyzeset,
  * a mezok szamontartasat, az eppen soron levo jatekos es a csapatok pontjainak szamontartasat
  */
 public class Game implements Serializable {
+    private static final Logger logger = Logger.getLogger("logger");
     static final int ROUND_BEGIN_ACTION_NUMBER = 3;
     /**
      * Az osztaly egyetlen peldanya
@@ -214,13 +217,13 @@ public class Game implements Serializable {
 
         //the field that needs to be changed is not neighbouring
         if(!p.getNeighbours().contains(oldEnd)) {
-            System.out.println("Old end is not neighbour!!!!!!");
+            logger.log(Level.WARNING, "Old end is not neighbour!!!!!!");
             return;
         }
 
         //the field that needs to be plugged is already a neighbour
         if(p.getNeighbours().contains(newEnd)) {
-            System.out.println("New end is neighbour!!!!!!");
+            logger.log(Level.WARNING, "New end is neighbour!!!!!!");
             return;
         }
 
@@ -234,7 +237,7 @@ public class Game implements Serializable {
             }
             this.actionTaken();
         }
-        else System.out.println("New end is same as old end!!!!!!");
+        else logger.log(Level.WARNING, "New end is same as old end!!!!!!");
     }
 
     /**

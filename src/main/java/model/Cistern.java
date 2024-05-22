@@ -4,12 +4,15 @@ import interfaces.Periodic;
 
 import java.security.SecureRandom;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Felelossege, hogy eltarolja folyt-e bele viz a korben (mert ha igen, akkor pontot kapnak a szerelok). Emellett
  * tarolja, hogy van-e rajta meg fel nem vett pumpa, melyet a szerelok felvehetnek
  */
 public class Cistern extends Field implements Periodic {
+    private static final Logger logger = Logger.getLogger("logger");
     private final SecureRandom random = new SecureRandom();
     /**
      * A bemeneti csove
@@ -54,7 +57,7 @@ public class Cistern extends Field implements Periodic {
             if(input != null) input.setNewWaterState(false);
             input = (Pipe) p;
         } catch(Exception e) {
-            System.out.print("Error casting field to pipe.");
+            logger.log(Level.WARNING, "Error casting field to pipe.");
         }
     }
 
@@ -83,14 +86,14 @@ public class Cistern extends Field implements Periodic {
                     spawnedPump = new Pump();
                 }
             } else {
-                System.out.println("Spawnoljon pumpa?");
+                logger.log(Level.INFO, "Spawnoljon pumpa?");
                 Scanner scanner = new Scanner(System.in);
                 String valasz = scanner.nextLine();
                 if (valasz.equals("Igen")) {
                     spawnedPump = new Pump();
                 }
                 if (!valasz.equals("Nem")) {
-                    System.out.println("Helytelen valasz, ezert nem spawnolodik pumpa.");
+                    logger.log(Level.WARNING, "Helytelen valasz, ezert nem spawnolodik pumpa.");
                 }
             }
         }

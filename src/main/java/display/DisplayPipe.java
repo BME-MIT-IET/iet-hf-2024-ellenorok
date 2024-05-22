@@ -54,7 +54,7 @@ public class DisplayPipe extends DisplayField {
     /**
      * A kirajzolt cső szélessége.
      */
-    final float displayWidth = 10;
+    static final float DISPLAYWIDTH = 10;
 
     /**
      * Kiszámolja a kirajzolt sokszög helyét. A cső két vége a következő helyeken lesz, a következő kritériumok alapján:
@@ -92,7 +92,7 @@ public class DisplayPipe extends DisplayField {
         // lineTo -> lineFrom
         Vec2 directionVector = Vec2.normalize(Vec2.subtract(lineFrom, lineTo));
         Vec2 normal = new Vec2(directionVector.getY() * -1, directionVector.getX()); // perpendicular to directionVector (still unit vector)
-        normal = Vec2.multiply(normal, displayWidth / 2);
+        normal = Vec2.multiply(normal, DISPLAYWIDTH / 2);
 
         Vec2 topLeft = Vec2.add(lineTo, normal);
         Vec2 bottomLeft = Vec2.subtract(lineTo, normal);
@@ -206,7 +206,7 @@ public class DisplayPipe extends DisplayField {
 
         if(p.getPlayers().isEmpty()) return;
         Point c = getCenter();
-        int dim = (int)displayWidth * 3;
+        int dim = (int)DISPLAYWIDTH * 3;
         Rectangle r = new Rectangle(c.x - dim / 2, c.y - dim / 2, dim, dim);
         playerIcons.add(new PlayerIcon(r, p.getPlayers().get(0)));
     }

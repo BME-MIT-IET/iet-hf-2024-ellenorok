@@ -1,3 +1,5 @@
+import model.Game;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 
 public class GraphicsDesigner extends JFrame implements ActionListener {
-    //private Game game;
+    private Game game = new Game();
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private JButton bPlay;
