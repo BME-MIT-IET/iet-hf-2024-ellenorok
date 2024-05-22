@@ -87,6 +87,7 @@ public class Game implements Serializable {
         }
         return instance;
     }
+
     public int getMechanicPoints() {
         return mechanicPoints;
     }
@@ -182,6 +183,11 @@ public class Game implements Serializable {
      */
     public void addSaboteurPoints() {
         saboteurPoints++;
+    }
+
+    public void resetPlayersPoints() {
+        saboteurPoints = 0;
+        mechanicPoints = 0;
     }
 
     /**

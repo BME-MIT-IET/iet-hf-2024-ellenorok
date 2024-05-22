@@ -8,7 +8,7 @@ public class Main {
     /**
      * the code under is not used, but it is not deleted because we might need some of it to generate the map
      */
-    private static void defaultMap() {
+    public static void defaultMap() {
         //6 pipes
         Pipe pipe1 = new Pipe();
         Pipe pipe2 = new Pipe();
