@@ -40,8 +40,6 @@ public class Graphics extends JFrame {
     private JButton bEndGame;
     private JButton bEndTurn;
 
-    private JPanel resetPanel;
-
     //logic
     private final transient ArrayList<DisplayField> clicked = new ArrayList<>();
 
@@ -59,7 +57,6 @@ public class Graphics extends JFrame {
         }
         if(pMap != null) pMap.repaint();
     }
-
 
     public Graphics() {
         super("Game");
@@ -94,25 +91,11 @@ public class Graphics extends JFrame {
         modelUpdated("Tip: Drag&Drop with <br> right click to move fields around!");
 
         //setting action commands for buttons
-        bPlay.addActionListener(e -> {
-            Game.getInstance().resetPlayersPoints();
-            modelUpdated("end turn");
-            cardLayout.next(cardPanel);
-        });
-
+        bPlay.addActionListener(e -> cardLayout.next(cardPanel));
         bQuit.addActionListener(e -> {
-            messagePopup("You quit the game!");
-
-            new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                System.exit(0);
-            }).start();
+            messagePopup("Tie!");
+            cardLayout.previous(cardPanel);
         });
-
         bEndGame.addActionListener(e -> endGame());
         bBreak.addActionListener(e -> breakField());
         bRepair.addActionListener(e -> repairField());
@@ -205,12 +188,6 @@ public class Graphics extends JFrame {
             messagePopup("A sabotourok nyertek!");
 
         else if(Game.getInstance().getMechanicPoints() >= 100)
-            messagePopup("A szerelők nyertek!");
-
-        else if(Game.getInstance().getSaboteurPoints() > Game.getInstance().getMechanicPoints())
-            messagePopup("A sabotourok nyertek!");
-
-        else if(Game.getInstance().getSaboteurPoints() < Game.getInstance().getMechanicPoints())
             messagePopup("A szerelők nyertek!");
 
         else
