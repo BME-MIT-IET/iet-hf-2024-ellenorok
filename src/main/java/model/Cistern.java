@@ -2,7 +2,7 @@ package model;
 
 import interfaces.Periodic;
 
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.Scanner;
 
 /**
@@ -10,7 +10,7 @@ import java.util.Scanner;
  * tarolja, hogy van-e rajta meg fel nem vett pumpa, melyet a szerelok felvehetnek
  */
 public class Cistern extends Field implements Periodic {
-    private Random random = new Random();
+    private final SecureRandom random = new SecureRandom();
     /**
      * A bemeneti csove
      */
@@ -54,7 +54,7 @@ public class Cistern extends Field implements Periodic {
             if(input != null) input.setNewWaterState(false);
             input = (Pipe) p;
         } catch(Exception e) {
-            e.printStackTrace();
+            System.out.print("Error casting field to pipe.");
         }
     }
 

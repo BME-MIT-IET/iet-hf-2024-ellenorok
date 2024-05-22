@@ -37,7 +37,7 @@ public class Source extends Field implements Periodic, Serializable {
         try {
             output = (Pipe) p;
         } catch(Exception e) {
-            e.printStackTrace();
+            System.out.print("Error casting field to pipe.");
         }
 
     }

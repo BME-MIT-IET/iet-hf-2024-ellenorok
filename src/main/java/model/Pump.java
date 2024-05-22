@@ -3,7 +3,7 @@ package model;
 import interfaces.*;
 
 import java.io.Serializable;
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * A jatekszabalyok szerinti pumpa funkcioit valositja meg
  */
 public class Pump extends Field implements Periodic, Serializable {
-    private final Random random = new Random();
+    private final SecureRandom random = new SecureRandom();
     private transient Logger logger;
     /**
      * A bemeneti csove

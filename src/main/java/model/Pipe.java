@@ -4,7 +4,7 @@ import interfaces.Periodic;
 import interfaces.Stateful;
 
 import java.io.Serializable;
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * akkor a kor vegen pontot ad a szabotoroknek
  */
 public class Pipe extends Field implements Periodic, Stateful, Serializable {
-    private final Random random = new Random();
+    private final SecureRandom random = new SecureRandom();
     private transient Logger logger;
     /**
      * Van-e benne viz, mindenki ezt a valtozot olvassa
