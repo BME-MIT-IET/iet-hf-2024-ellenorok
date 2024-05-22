@@ -9,5 +9,8 @@
         <module name="iet.hf.ellenorok" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="iet.hf.ellenorok" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
